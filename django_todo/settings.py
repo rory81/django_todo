@@ -27,7 +27,6 @@ SECRET_KEY = '=c796v%%_0dj8vddo6s%i4ox8&j&#&-1%chgxh1y6q38fd-g_a'
 DEBUG = True
 
 ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'), os.environ.get('HOSTNAME')]
-# ['nb-django-todo.herokuapp.com']
 
 
 # Application definition
