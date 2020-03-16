@@ -26,7 +26,8 @@ SECRET_KEY = '=c796v%%_0dj8vddo6s%i4ox8&j&#&-1%chgxh1y6q38fd-g_a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nb-django-todo.herokuapp.com']
+ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'), os.environ.get('HOSTNAME')]
+# ['nb-django-todo.herokuapp.com']
 
 
 # Application definition
@@ -81,9 +82,18 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-DATABASES = {
-    'default': dj_database_url.parse("postgres://eetzdqzakbwvwu:b6a55a6f76c1dc0e05f275fa28d25a58d1306b3875ec7019e5f39d0dc6787433@ec2-46-137-84-173.eu-west-1.compute.amazonaws.com:5432/d8dehsdfa5mjbj")
-}
+if "DATABASE_URL" in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+    print("Postgres DB not found, using sqlite instead")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
