@@ -29,7 +29,6 @@ DEBUG = True
 ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'), os.environ.get('HOSTNAME')]
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
